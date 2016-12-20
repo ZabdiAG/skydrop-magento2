@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <skydrop_shipping>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Skydrop\Shipping\Model\Carrier\SkydropShipping</model>
+                <name>Skydrop Shipping Rates</name>
+                <price>15.00</price>
+                <title>Skydrop</title>
+                <type>I</type>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <environment>staging</environment>
+                <opening_time>10,00,00</opening_time>
+                <closing_time>22,00,00</closing_time>
+                <working_days>1,2,3,4,5</working_days>
+                <vehicle_type>car</vehicle_type>
+                <service_type>Hoy,next_day,EExps</service_type>
+                <stores>1</stores>
+            </skydrop_shipping>
+        </carriers>
+    </default>
+</config>
