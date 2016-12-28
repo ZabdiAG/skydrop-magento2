@@ -1,0 +1,39 @@
+{
+  "name": "skydrop/php",
+  "description": "Skydrop Library for PHP",
+  "type": "library",
+  "version": "1.0.1",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Yaser Almasri",
+      "email": "yaser@masys.co"
+    }
+  ],
+  "keywords": [
+    "skydrop",
+    "shipping",
+    "rate"
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5",
+    "guzzlehttp/guzzle": "^6.2",
+    "respect/validation": "^1.1",
+    "airbrake/phpbrake": "^0.2.0",
+    "emgiezet/errbit-php": "dev-master",
+    "maknz/slack": "^1.7"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*",
+    "php-vcr/php-vcr": "^1.2"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "autoload": {
+    "psr-4": {
+      "Skydrop\\": "Skydrop"
+    }
+  }
+}

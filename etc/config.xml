@@ -3,14 +3,9 @@
     <default>
         <carriers>
             <skydrop_shipping>
-                <active>1</active>
-                <sallowspecific>0</sallowspecific>
+                <active>0</active>
                 <model>Skydrop\Shipping\Model\Carrier\SkydropShipping</model>
-                <name>Skydrop Shipping Rates</name>
-                <price>15.00</price>
                 <title>Skydrop</title>
-                <type>I</type>
-                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
                 <environment>staging</environment>
                 <opening_time>10,00,00</opening_time>
                 <closing_time>22,00,00</closing_time>

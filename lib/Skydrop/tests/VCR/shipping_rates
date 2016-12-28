@@ -1,0 +1,137 @@
+
+-
+    request:
+        method: POST
+        url: 'http://54.191.139.107/api/v2/shipping_rates'
+        headers:
+            Host: 54.191.139.107
+            Expect: null
+            Accept-Encoding: null
+            Authorization: abcdefghijk
+            Content-Type: application/json
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.43.0 PHP/7.1.0RC3'
+            Accept: null
+        body: '{"rate":{"origin":{"country":"MX","postal_code":"66220","province":"NL","city":"San Pedro Garza Garc\u00eda","address1":"Rio Guadalquivir 422-A","address2":null,"phone":"8140405222"},"destination":{"country":"MX","postal_code":"66290","province":"NL","city":"San Pedro Garza Garc\u00eda","name":"Yaser Almasri","address1":"rio rosas 404","address2":"","phone":""},"items":[{"name":"test product","sku":"","quantity":1,"grams":0,"price":12300,"vendor":"skydrop-local","requires_shipping":true,"taxable":true,"fulfillment_service":"manual","properties":null,"product_id":7910456769,"variant_id":25816705921}],"currency":"MXN"}}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Wed, 12 Oct 2016 18:52:53 GMT'
+            Server: 'Apache/2.4.7 (Ubuntu)'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Frame-Options: SAMEORIGIN
+            X-XSS-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Runtime: '0.262601'
+            X-Request-Id: 50d2c935-82fd-4807-ace7-5e55742c18b3
+            X-Powered-By: 'Phusion Passenger 5.0.18'
+            Set-Cookie: 'request_method=POST; path=/'
+            ETag: '"3d8a271bb00a7646e6316928a7e76683"'
+            Status: '200 OK'
+            Transfer-Encoding: chunked
+            Content-Type: 'application/json; charset=utf-8'
+        body: '{"rates":[{"starting_hour":"13:57","ending_hour":"14:16","total_price":"40.60","service_name":"Ultra Express Motorcycle","service_code":"EExps","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"15:00","ending_hour":"22:00","total_price":"40.60","service_name":"Mismo Día Motorcycle","service_code":"Hoy","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"15:00","ending_hour":"19:00","total_price":"40.60","service_name":"Express Motorcycle Motorcycle","service_code":"Exps","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"16:00","ending_hour":"20:00","total_price":"40.60","service_name":"Express Motorcycle Motorcycle","service_code":"Exps","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"10:00","ending_hour":"22:00","total_price":"40.60","service_name":"Siguiente día Motorcycle","service_code":"next_day","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"14:02","ending_hour":"14:31","total_price":"95.00","service_name":"Ultra Express CAR","service_code":"EExps","vehicle_type":"car","currency":"MXN","subtotal":"81.90"},{"starting_hour":"09:00","ending_hour":"15:00","total_price":"40.60","service_name":"Mismo Día CAR","service_code":"Hoy","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"15:00","ending_hour":"20:00","total_price":"40.60","service_name":"Mismo Día CAR","service_code":"Hoy","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"15:00","ending_hour":"15:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"16:00","ending_hour":"16:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"17:00","ending_hour":"17:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"18:00","ending_hour":"18:24","total_price":"73.08","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"63.00"},{"starting_hour":"19:00","ending_hour":"19:24","total_price":"73.08","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"63.00"},{"starting_hour":"20:00","ending_hour":"20:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"21:00","ending_hour":"21:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"22:00","ending_hour":"22:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"10:00","ending_hour":"22:00","total_price":"40.60","service_name":"Siguiente día CAR","service_code":"next_day","vehicle_type":"car","currency":"MXN","subtotal":"35.00"}]}'
+-
+    request:
+        method: POST
+        url: 'http://54.191.139.107/api/v2/shipping_rates'
+        headers:
+            Host: 54.191.139.107
+            Expect: null
+            Accept-Encoding: null
+            Authorization: abcdefghijk
+            Content-Type: application/json
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.43.0 PHP/7.1.0RC3'
+            Accept: null
+        body: '{}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 13 Oct 2016 22:33:19 GMT'
+            Server: 'Apache/2.4.7 (Ubuntu)'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Frame-Options: SAMEORIGIN
+            X-XSS-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Runtime: '1.809703'
+            X-Request-Id: 28dbdfdb-b749-4d44-89cc-8b5cee57c9e3
+            X-Powered-By: 'Phusion Passenger 5.0.18'
+            Set-Cookie: 'request_method=POST; path=/'
+            ETag: '"8b670ed4113fcf7bf5ce9b4cf6aceebf"'
+            Status: '200 OK'
+            Transfer-Encoding: chunked
+            Content-Type: 'application/json; charset=utf-8'
+        body: '{"rates":[]}'
+-
+    request:
+        method: POST
+        url: 'http://54.191.139.107/api/v2/shipping_rates'
+        headers:
+            Host: 54.191.139.107
+            Expect: null
+            Accept-Encoding: null
+            Authorization: abcdefghijk
+            Content-Type: application/json
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.43.0 PHP/7.1.0RC3'
+            Accept: null
+        body: '{"\u0000Skydrop\\ShippingRate\\ShippingRate\u0000origin":{"country":"MX","postal_code":"66220","province":"NL","city":"San Pedro Garza Garc\u00eda","address1":"Rio Guadalquivir 422-A","address2":null,"phone":"8140405222"},"\u0000Skydrop\\ShippingRate\\ShippingRate\u0000destination":{"country":"MX","postal_code":"66290","province":"NL","city":"San Pedro Garza Garc\u00eda","name":"Yaser Almasri","address1":"rio rosas 404","address2":"","phone":""},"\u0000Skydrop\\ShippingRate\\ShippingRate\u0000items":null}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 13 Oct 2016 22:34:33 GMT'
+            Server: 'Apache/2.4.7 (Ubuntu)'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Frame-Options: SAMEORIGIN
+            X-XSS-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Runtime: '0.485086'
+            X-Request-Id: f69fe26a-9637-4a9d-8ebc-a39cd064c70e
+            X-Powered-By: 'Phusion Passenger 5.0.18'
+            Set-Cookie: 'request_method=POST; path=/'
+            ETag: '"8b670ed4113fcf7bf5ce9b4cf6aceebf"'
+            Status: '200 OK'
+            Transfer-Encoding: chunked
+            Content-Type: 'application/json; charset=utf-8'
+        body: '{"rates":[]}'
+-
+    request:
+        method: POST
+        url: 'http://54.191.139.107/api/v2/shipping_rates'
+        headers:
+            Host: 54.191.139.107
+            Expect: null
+            Accept-Encoding: null
+            Authorization: abcdefghijk
+            Content-Type: application/json
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.43.0 PHP/7.1.0RC3'
+            Accept: null
+        body: '{"rate":{"origin":{"name":"","phone":"8140405222","address1":"Rio Guadalquivir 422-A","address2":null,"city":"San Pedro Garza Garc\u00eda","province":"NL","postal_code":"66220","country":"MX"},"destination":{"name":"Yaser Almasri","phone":"","address1":"rio rosas 404","address2":"","city":"San Pedro Garza Garc\u00eda","province":"NL","postal_code":"66290","country":"MX"}}}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Date: 'Thu, 13 Oct 2016 22:46:18 GMT'
+            Server: 'Apache/2.4.7 (Ubuntu)'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Frame-Options: SAMEORIGIN
+            X-XSS-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Runtime: '0.195591'
+            X-Request-Id: 5f0eeef3-5f51-4eb1-aa6f-945ec9dbcd21
+            X-Powered-By: 'Phusion Passenger 5.0.18'
+            Set-Cookie: 'request_method=POST; path=/'
+            ETag: '"bbd1537d51f09ce95a61a9be18e24a8f"'
+            Status: '200 OK'
+            Transfer-Encoding: chunked
+            Content-Type: 'application/json; charset=utf-8'
+        body: '{"rates":[{"starting_hour":"17:51","ending_hour":"18:10","total_price":"40.60","service_name":"Ultra Express Motorcycle","service_code":"EExps","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"10:00","ending_hour":"22:00","total_price":"40.60","service_name":"Siguiente día Motorcycle","service_code":"next_day","vehicle_type":"scooter","currency":"MXN","subtotal":"35.00"},{"starting_hour":"17:56","ending_hour":"18:25","total_price":"52.78","service_name":"Ultra Express CAR","service_code":"EExps","vehicle_type":"car","currency":"MXN","subtotal":"45.50"},{"starting_hour":"15:00","ending_hour":"20:00","total_price":"40.60","service_name":"Mismo Día CAR","service_code":"Hoy","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"18:00","ending_hour":"18:24","total_price":"73.08","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"63.00"},{"starting_hour":"19:00","ending_hour":"19:24","total_price":"73.08","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"63.00"},{"starting_hour":"20:00","ending_hour":"20:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"21:00","ending_hour":"21:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"22:00","ending_hour":"22:24","total_price":"40.60","service_name":"Express CAR","service_code":"Exps","vehicle_type":"car","currency":"MXN","subtotal":"35.00"},{"starting_hour":"10:00","ending_hour":"22:00","total_price":"40.60","service_name":"Siguiente día CAR","service_code":"next_day","vehicle_type":"car","currency":"MXN","subtotal":"35.00"}]}'

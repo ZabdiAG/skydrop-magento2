@@ -1,93 +1,209 @@
 <?php
 namespace Skydrop\Shipping\Model\Carrier;
- 
+
+require_once(__DIR__.'/../../lib/Skydrop/vendor/autoload.php');#TODO: delete this line when installed with composer
+
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObject;
+use Magento\Shipping\Model\Carrier\AbstractCarrier;
+use Magento\Shipping\Model\Carrier\CarrierInterface;
+use Magento\Shipping\Model\Rate\ResultFactory;
+use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
+use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\Quote\Model\Quote\Address\RateRequest;
-use Magento\Shipping\Model\Rate\Result;
- 
-class SkydropShipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
-    \Magento\Shipping\Model\Carrier\CarrierInterface
+use Psr\Log\LoggerInterface;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Customer\Model\Session;
+use Magento\Customer\Model\Address;
+use Skydrop\Shipping\Helper;
+
+/**
+* Class Carrier In-Store Pickup shipping model
+*/
+class SkydropShipping extends AbstractCarrier implements CarrierInterface
 {
-    /**
-     * @var string
-     */
-    protected $_code = 'skydrop_shipping';
- 
-    /**
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
-     * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
-     * @param array $data
-     */
-    public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
-        \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
-        array $data = []
-    ) {
-        $this->_rateResultFactory = $rateResultFactory;
-        $this->_rateMethodFactory = $rateMethodFactory;
-        parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
+  /**
+  * Carrier's code
+  *
+  * @var string
+  */
+  protected $_code = 'skydrop_shipping';
+
+  /**
+  * Whether this carrier has fixed rates calculation
+  *
+  * @var bool
+  */
+  protected $_isFixed = true;
+
+  /**
+  * @var ResultFactory
+  */
+  protected $rateResultFactory;
+
+  /**
+  * @var MethodFactory
+  */
+  protected $rateMethodFactory;
+
+  /**
+   * @var StoreManagerInterface */
+  protected $storeManager;
+
+  /**
+   * @var Session
+   */
+  public $customerSession;
+
+  /**
+   * @var Address
+   */
+  public $customerAddress;
+
+  /**
+   * @var SDK\Config
+   */
+  public $configSDK;
+
+  public $carrierHelper;
+
+  public $skydropSDKHelper;
+
+  /**
+  * @param ScopeConfigInterface $scopeConfig
+  * @param ErrorFactory $rateErrorFactory
+  * @param LoggerInterface $logger
+  * @param ResultFactory $rateResultFactory
+  * @param MethodFactory $rateMethodFactory
+  * @param StoreManagerInterface $storeManagerInterface
+  * @param array $data
+  */
+  public function __construct(
+    ScopeConfigInterface $scopeConfig,
+    ErrorFactory $rateErrorFactory,
+    LoggerInterface $logger,
+    ResultFactory $rateResultFactory,
+    MethodFactory $rateMethodFactory,
+    StoreManagerInterface $storeManager,
+    Session $customerSession,
+    Address $customerAddress,
+    Helper\SDK\Config $configSDK,
+    Helper\Carrier $carrierHelper,
+    Helper\SDK\SkydropSDK $SDKHelper,
+    array $data = []
+  ) {
+    $this->rateResultFactory = $rateResultFactory;
+    $this->rateMethodFactory = $rateMethodFactory;
+    $this->storeManager      = $storeManager;
+    $this->customerSession   = $customerSession;
+    $this->customerAddress   = $customerAddress;
+    $this->configSDK         = $configSDK;
+    $this->carrierHelper     = $carrierHelper;
+    $this->skydropSDKHelper  = $SDKHelper;
+    parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
+  }
+
+  /**
+  * Generates list of allowed carrier`s shipping methods
+  * Displays on cart price rules page
+  *
+  * @return array
+  * @api
+  */
+  public function getAllowedMethods()
+  {
+    return [$this->getCarrierCode() => __($this->getConfigData('name'))];
+  }
+
+  /**
+  * Collect and get rates for storefront
+  *
+  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+  * @param RateRequest $request
+  * @return DataObject|bool|null
+  * @api
+*/
+  public function collectRates(RateRequest $request){
+    $result = $this->rateResultFactory->create();
+    if (!in_array($this->getCurrentStoreId(), $this->getIdStoresConfigured())) {
+      return $result;
     }
- 
-    /**
-     * @return array
-     */
-    public function getAllowedMethods()
-    {
-        return ['skydrop_shipping' => $this->getConfigData('name')];
+    $this->configSDK->configure(
+      $this->getConfigData('api_key')
+      ,$this->getConfigData('environment')
+    );
+    $this->configSDK->filters(
+      explode(',',$this->getConfigData('working_days'))
+      ,explode(',',$this->getConfigData('opening_time'))
+      ,explode(',',$this->getConfigData('closing_time'))
+    );
+    $this->configSDK->customFilters(
+      $vehicleType = $this->getConfigData('vehicle_type')
+      ,$serviceType =  explode(',',$this->getConfigData('service_type'))
+    );
+    $this->configSDK->rules();#TODO: add this functionallity
+    try {
+      $items =$this->carrierHelper->getItems($request);
+      $builder = new \Skydrop\ShippingRate\ShippingRateBuilder([
+        'origin'        => $this->carrierHelper->getOrigin( $this->storeManager->getStore(),$this ),
+        'destination'   => $this->carrierHelper->getDestination($request, $this),
+        'items'        => $items
+      ]);
+      $searcher = new \Skydrop\ShippingRate\Search($builder);
+      $result = $this->addRates($searcher->call());
+    } catch (\RuntimeException $e) {
+      \Skydrop\Configs::notifyErrbit($e);
+      return $result;
     }
- 
-    /**
-     * @param RateRequest $request
-     * @return bool|Result
-     */
-    public function collectRates(RateRequest $request)
-    {
-        if (!$this->getConfigFlag('active')) {
-            return false;
-        }
- 
-        /** @var \Magento\Shipping\Model\Rate\Result $result */
-        $result = $this->_rateResultFactory->create();
- 
-        for ($x = 0; $x < 3; $x++)
-        {
-            $rate = (object)array(
-                "amount" => 30 * $x,
-                "method" => "skydrop_shipping".$x,
-                "methodTitle" => "Skydrop Shipping ".$x
-            );
+    return $result;
+  }
 
-            $method = $this->setRate($rate);
+  /**
+   * @return int
+   */
+  public function getCurrentStoreId(){
+    return $this->storeManager->getStore()->getId();
+  }
 
-            $result->append($method);
-        }
- 
-        return $result;
+  #Dependencies: AbstractCarrier
+  /**
+   * @return array
+   */
+  public function getIdStoresConfigured(){
+    return $storesIds = explode(
+      ',',
+      $this->getConfigData('stores')
+    );
+  }
+
+  #Dependencies: ResultFactory
+  /**
+   * @param $rates
+   * @return \Magento\Shipping\Model\Rate\Result
+   */
+  public function addRates($rates){
+    $result = $this->rateResultFactory->create();
+    foreach ($rates as $rate) {
+      $result->append($this->_getRate($rate));
     }
+    return $result;
+  }
 
-    private function setRate($rate)
-    {
-        /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
-        $method = $this->_rateMethodFactory->create();
+  #Dependencies: $rateMethodFactory,
+  /**
+   * @param $skydrop_rate
+   * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
+   */
+  public function _getRate($skydrop_rate){
+    $rateResultMethod = $this->rateMethodFactory->create();
+    $rateResultMethod->setData('carrier', $this->getCarrierCode());
+    $rateResultMethod->setData('carrier_title', $this->getConfigData('title'));
 
-        $method->setCarrier('skydrop_shipping');
-        $method->setCarrierTitle($this->getConfigData('title'));
+    $rateResultMethod->setData('method',$skydrop_rate->service_code);
+    $rateResultMethod->setData('method_title',$skydrop_rate->service_name);
 
-        $method->setMethod($rate->method);
-        $method->setMethodTitle($rate->methodTitle);
-
-        /*you can fetch shipping price from different sources over some APIs, we used price from config.xml - xml node price*/
-        $amount = $rate->amount;
-
-        $method->setPrice($amount);
-        $method->setCost($amount);
-
-        return $method;
-    }
+    $rateResultMethod->setPrice($skydrop_rate->total_price);
+    $rateResultMethod->setData('cost',0);
+    return $rateResultMethod;
+  }
 }
-

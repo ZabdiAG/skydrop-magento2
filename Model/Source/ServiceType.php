@@ -12,8 +12,9 @@ class ServiceType implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         return [
-            [ 'value' => 'Hoy',      'label' => 'Same Day' ],
+          [ 'value' => 'Hoy', 'label' => 'Same Day' ],
+          [ 'value' => 'next_day', 'label' => 'Next Day' ],
+          [ 'value' => 'EExps', 'label' => 'Express' ],
         ];
     }
 }
-

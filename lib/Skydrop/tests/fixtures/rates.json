@@ -1,0 +1,40 @@
+{
+  "rate": {
+    "origin": {
+      "country": "MX",
+      "postal_code": "66220",
+      "province": "NL",
+      "city": "San Pedro Garza García",
+      "address1": "Rio Guadalquivir 422-A",
+      "address2": null,
+      "phone": "8140405222"
+    },
+    "destination": {
+      "country": "MX",
+      "postal_code": "66290",
+      "province": "NL",
+      "city": "San Pedro Garza García",
+      "name": "Yaser Almasri",
+      "address1": "rio rosas 404",
+      "address2": "",
+      "phone": ""
+    },
+    "items": [
+      {
+        "name": "test product",
+        "sku": "",
+        "quantity": 1,
+        "grams": 0,
+        "price": 12300,
+        "vendor": "skydrop-local",
+        "requires_shipping": true,
+        "taxable": true,
+        "fulfillment_service": "manual",
+        "properties": null,
+        "product_id": 7910456769,
+        "variant_id": 25816705921
+      }
+    ],
+    "currency": "MXN"
+  }
+}

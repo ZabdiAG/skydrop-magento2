@@ -1,0 +1,69 @@
+
+-
+    request:
+        method: POST
+        url: 'http://54.191.139.107/api/v2/orders'
+        headers:
+            Host: 54.191.139.107
+            Expect: null
+            Accept-Encoding: null
+            Authorization: abcdefghijk
+            Content-Type: application/json
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.43.0 PHP/7.1.0RC3'
+            Accept: null
+        body: '{"pickup":{"name":"juan pablo","email":"pjuan@gmail.com","street_name_and_number":"rio guadalquivir 422","municipality":"san pedro","neighborhood":"del valle","telephone":"81818181818"},"delivery":{"name":"juan rdz","email":"juan@gmail.com","street_name_and_number":"rio rosas 101","municipality":"san pedro","neighborhood":"del valle","telephone":"81149090"},"service":{"service_code":"Hoy","vehicle_type":"car","schedule_date":"2016-10-10","starting_hour":"10:00","ending_hour":"22:00"},"package":{"cash_on_delivery":"true","cod_amount":""}}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '201'
+            message: Created
+        headers:
+            Date: 'Thu, 13 Oct 2016 20:31:58 GMT'
+            Server: 'Apache/2.4.7 (Ubuntu)'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Frame-Options: SAMEORIGIN
+            X-XSS-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Runtime: '0.229379'
+            X-Request-Id: c31d84ae-444b-4cfb-8f74-385dc6d573ce
+            X-Powered-By: 'Phusion Passenger 5.0.18'
+            Set-Cookie: 'request_method=POST; path=/'
+            ETag: '"164f101b2e19d10981164991d57d517b"'
+            Status: '201 Created'
+            Transfer-Encoding: chunked
+            Content-Type: 'application/json; charset=utf-8'
+        body: '{"ticket":"S111858","tracking_url":"http://www.skydrop.com.mx/track/NjEwMTIxMDg0MTI="}'
+-
+    request:
+        method: POST
+        url: 'http://54.191.139.107/api/v2/orders'
+        headers:
+            Host: 54.191.139.107
+            Expect: null
+            Accept-Encoding: null
+            Authorization: abcdefghijk
+            Content-Type: application/json
+            User-Agent: 'GuzzleHttp/6.2.1 curl/7.43.0 PHP/7.1.0RC3'
+            Accept: null
+        body: '{"pickup":{"name":"juan pablo","email":"pjuan@gmail.com","street_name_and_number":"rio guadalquivir 422","municipality":"san pedro","neighborhood":"del valle","telephone":"81818181818"},"delivery":{"name":"juan pablo","email":"pjuan@gmail.com","street_name_and_number":"rio guadalquivir 422","municipality":"san pedro","neighborhood":"del valle","telephone":"81818181818"},"service":{"service_code":"Hoy","vehicle_type":"car","schedule_date":"2016-10-10","starting_hour":"10:00","ending_hour":"22:00"},"package":{"cash_on_delivery":"true","cod_amount":""}}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '201'
+            message: Created
+        headers:
+            Date: 'Thu, 13 Oct 2016 21:33:55 GMT'
+            Server: 'Apache/2.4.7 (Ubuntu)'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Frame-Options: SAMEORIGIN
+            X-XSS-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Runtime: '0.148478'
+            X-Request-Id: 1052ace3-5224-4262-b2c5-6d6c9f35febd
+            X-Powered-By: 'Phusion Passenger 5.0.18'
+            Set-Cookie: 'request_method=POST; path=/'
+            ETag: '"ace38cbbe52ced92e21942e1e40b6110"'
+            Status: '201 Created'
+            Transfer-Encoding: chunked
+            Content-Type: 'application/json; charset=utf-8'
+        body: '{"ticket":"S111860","tracking_url":"http://www.skydrop.com.mx/track/NjEwMTIxMDg0NDA="}'
