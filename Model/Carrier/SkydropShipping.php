@@ -125,7 +125,10 @@ class SkydropShipping extends AbstractCarrier implements CarrierInterface
 */
   public function collectRates(RateRequest $request){
     $result = $this->rateResultFactory->create();
-    if (!in_array($this->getCurrentStoreId(), $this->getIdStoresConfigured())) {
+    if (!in_array(
+      $this->carrierHelper->getCurrentStoreId($this->storeManager),
+      $this->carrierHelper->getIdStoresConfigured($this)
+    )) {
       return $result;
     }
     $this->configSDK->configure(
@@ -156,24 +159,6 @@ class SkydropShipping extends AbstractCarrier implements CarrierInterface
       return $result;
     }
     return $result;
-  }
-
-  /**
-   * @return int
-   */
-  public function getCurrentStoreId(){
-    return $this->storeManager->getStore()->getId();
-  }
-
-  #Dependencies: AbstractCarrier
-  /**
-   * @return array
-   */
-  public function getIdStoresConfigured(){
-    return $storesIds = explode(
-      ',',
-      $this->getConfigData('stores')
-    );
   }
 
   #Dependencies: ResultFactory

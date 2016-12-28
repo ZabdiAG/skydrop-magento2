@@ -9,24 +9,24 @@ class Carrier extends \Magento\Framework\App\Helper\AbstractHelper
   /**
    * @var StoreManagerInterface
    */
-  protected $storeManager;
+  protected $storeManager;//TODO: this shouldnt be here
 
   #Dependencies: AbstractCarrier
   /**
    * @return array
    */
-  public function getIdStoresConfigured(){
+  public function getIdStoresConfigured(AbstractCarrier $carrier){
     return $storesIds = explode(
       ',',
-      $this->getConfigData('stores')
+      $carrier->getConfigData('stores')
     );
   }
 
   /**
    * @return int
    */
-  public function getCurrentStoreId(){
-    return $this->storeManager->getStore()->getId();
+  public function getCurrentStoreId(StoreManagerInterface $storeManager){
+    return $storeManager->getStore()->getId();
   }
 
   #Dependencies: RateRequest
