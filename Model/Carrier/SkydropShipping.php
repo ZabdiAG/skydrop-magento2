@@ -4,23 +4,25 @@ namespace Skydrop\Shipping\Model\Carrier;
 require_once(__DIR__.'/../../lib/Skydrop/vendor/autoload.php');#TODO: delete this line when installed with composer
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\DataObject;
-use Magento\Shipping\Model\Carrier\AbstractCarrier;
-use Magento\Shipping\Model\Carrier\CarrierInterface;
-use Magento\Shipping\Model\Rate\ResultFactory;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
-use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
-use Magento\Quote\Model\Quote\Address\RateRequest;
 use Psr\Log\LoggerInterface;
+use Magento\Shipping\Model\Rate\ResultFactory;
+use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Address;
 use Skydrop\Shipping\Helper;
 
+use Magento\Quote\Model\Quote\Address\RateRequest;
+use Magento\Framework\DataObject;
+
+
+
 /**
 * Class Carrier In-Store Pickup shipping model
 */
-class SkydropShipping extends AbstractCarrier implements CarrierInterface
+class SkydropShipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier
+  implements \Magento\Shipping\Model\Carrier\CarrierInterface
 {
   /**
   * Carrier's code
@@ -61,36 +63,49 @@ class SkydropShipping extends AbstractCarrier implements CarrierInterface
   public $customerAddress;
 
   /**
-   * @var SDK\Config
+   * @var Helper\SDK\Config
    */
   public $configSDK;
 
+  /**
+   * @var Helper\Carrier
+   */
   public $carrierHelper;
 
+  /**
+   * @var Helper\SDK\SkydropSDK
+   */
   public $skydropSDKHelper;
 
+
   /**
-  * @param ScopeConfigInterface $scopeConfig
-  * @param ErrorFactory $rateErrorFactory
-  * @param LoggerInterface $logger
-  * @param ResultFactory $rateResultFactory
-  * @param MethodFactory $rateMethodFactory
-  * @param StoreManagerInterface $storeManagerInterface
-  * @param array $data
-  */
+   * SkydropShipping constructor.
+   * @param ScopeConfigInterface $scopeConfig
+   * @param ErrorFactory $rateErrorFactory
+   * @param LoggerInterface $logger
+   * @param ResultFactory $rateResultFactory
+   * @param MethodFactory $rateMethodFactory
+   * @param StoreManagerInterface $storeManager
+   * @param Session $customerSession
+   * @param Address $customerAddress
+   * @param Helper\SDK\Config $configSDK
+   * @param Helper\Carrier $carrierHelper
+   * @param Helper\SDK\SkydropSDK $SDKHelper
+   * @param array $data
+   */
   public function __construct(
-    ScopeConfigInterface $scopeConfig,
-    ErrorFactory $rateErrorFactory,
-    LoggerInterface $logger,
-    ResultFactory $rateResultFactory,
-    MethodFactory $rateMethodFactory,
-    StoreManagerInterface $storeManager,
-    Session $customerSession,
-    Address $customerAddress,
-    Helper\SDK\Config $configSDK,
-    Helper\Carrier $carrierHelper,
-    Helper\SDK\SkydropSDK $SDKHelper,
-    array $data = []
+    ScopeConfigInterface $scopeConfig
+    ,ErrorFactory $rateErrorFactory
+    ,LoggerInterface $logger
+    ,ResultFactory $rateResultFactory
+    ,MethodFactory $rateMethodFactory
+    ,StoreManagerInterface $storeManager
+    ,Session $customerSession
+    ,Address $customerAddress
+    ,Helper\SDK\Config $configSDK
+    ,Helper\Carrier $carrierHelper
+    ,Helper\SDK\SkydropSDK $SDKHelper
+    ,array $data = []
   ) {
     $this->rateResultFactory = $rateResultFactory;
     $this->rateMethodFactory = $rateMethodFactory;
@@ -120,8 +135,8 @@ class SkydropShipping extends AbstractCarrier implements CarrierInterface
   *
   * @SuppressWarnings(PHPMD.UnusedFormalParameter)
   * @param RateRequest $request
-  * @return DataObject|bool|null
-  * @api
+  * @return \Magento\Shipping\Model\Rate\Result
+   * @api
 */
   public function collectRates(RateRequest $request){
     $result = $this->rateResultFactory->create();
@@ -161,7 +176,6 @@ class SkydropShipping extends AbstractCarrier implements CarrierInterface
     return $result;
   }
 
-  #Dependencies: ResultFactory
   /**
    * @param $rates
    * @return \Magento\Shipping\Model\Rate\Result
@@ -174,7 +188,6 @@ class SkydropShipping extends AbstractCarrier implements CarrierInterface
     return $result;
   }
 
-  #Dependencies: $rateMethodFactory,
   /**
    * @param $skydrop_rate
    * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
