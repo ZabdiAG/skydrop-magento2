@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+  <system>
+    <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+      <group id="skydrop_shipping" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Skydrop Shipping</label>
+
+        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Enabled</label>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+
+        <field id="title" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Carrier title</label>
+        </field>
+
+        <!-- Custom fields -->
+        <field id="api_key" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>API Key</label>
+        </field>
+
+        <field id="environment" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Environment</label>
+          <source_model>Skydrop\Shipping\Model\Source\Environment</source_model>
+        </field>
+
+        <field id="working_days" translate="label" type="multiselect" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Working Days</label>
+          <source_model>Skydrop\Shipping\Model\Source\WorkingDays</source_model>
+        </field>
+
+        <field id="opening_time" translate="label" type="time" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Opening Time</label>
+        </field>
+
+        <field id="closing_time" translate="label" type="time" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Closing Time</label>
+        </field>
+
+        <field id="vehicle_type" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Vehicle Type</label>
+          <source_model>Skydrop\Shipping\Model\Source\VehicleType</source_model>
+        </field>
+
+        <field id="service_type" translate="label" type="multiselect" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Service Type</label>
+          <source_model>Skydrop\Shipping\Model\Source\ServiceType</source_model>
+        </field>
+
+        <!-- <field id="products_tag_rule" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Products With Tag - Rule</label>
+          <source_model>Skydrop\Shipping\Model\Source\ProductsWithTagRules</source_model>
+        </field> -->
+
+        <!-- <field id="products_tag_name" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Products With Tag - Tag Name</label>
+        </field> -->
+
+        <field id="lat" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Latitude</label>
+        </field>
+
+        <field id="lng" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Longitude</label>
+        </field>
+
+        <field id="stores" translate="label" type="multiselect" sortOrder="44" showInDefault="1" showInWebsite="1" showInStore="0">
+          <label>Stores</label>
+          <source_model>Skydrop\Shipping\Model\Source\Stores</source_model>
+        </field>
+
+      </group>
+    </section>
+  </system>
+</config>
